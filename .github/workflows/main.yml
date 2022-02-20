@@ -40,10 +40,10 @@ jobs:
         additional-plugin-paths: ${{ github.workspace }}/NSIS_Plugins/Plugins
     
     - name: Rename
-      run: mv installsig.exe installsig${{ matrix.os}}.exe
+      run: mv installsig.exe installsig${{matrix.os}}.exe
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: installsig.exe
-        path: installsig.exe
+        name: installsig${{matrix.os}}.exe
+        path: installsig${{matrix.os}}.exe
