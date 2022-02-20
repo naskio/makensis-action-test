@@ -1,4 +1,5 @@
-on: [push]
+on:
+  workflow_dispatch:
 
 jobs:
   create_installer:
@@ -6,7 +7,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ 'windows-latest', 'ubuntu-20.04', 'macos-latest' ]
+        os: [ 'windows-latest', 'ubuntu-latest', 'macos-latest' ]
 
     steps:
     - uses: actions/checkout@v1
@@ -23,7 +24,7 @@ jobs:
 
     - name: 'Install makensis (apt)'
       run: sudo apt update && sudo apt install -y nsis nsis-pluginapi
-      if: ${{ matrix.os == 'ubuntu-20.04' }}
+      if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: 'Install makensis (homebrew)'
       run: brew update && brew install makensis
@@ -31,7 +32,7 @@ jobs:
 
     - name: 'Set Plugin permissions'
       run: sudo chown -R $(whoami) /usr/share/nsis/Plugins/
-      if: ${{ matrix.os == 'ubuntu-20.04' }}
+      if: ${{ matrix.os == 'ubuntu-latest' }}
 
     - name: Create nsis installer
       uses: joncloud/makensis-action@v3.3
