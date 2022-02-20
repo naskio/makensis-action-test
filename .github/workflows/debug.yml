@@ -27,6 +27,13 @@ jobs:
           ls hello
           ls hello/sub_hello
       
+      - name: Install zip
+        uses: montudor/action-zip@v1
+
+      - name: Zip files
+        run: zip -qq -r hello.zip hello/
+        # working-directory: macos-latest/
+      
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:
@@ -35,5 +42,5 @@ jobs:
           body: ${{ github.event.inputs.version }}
           tag_name: ${{ github.event.inputs.version }}
           files: |
-            hello/
+            hello.zip
             hello/hello2.txt
