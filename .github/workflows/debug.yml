@@ -1,0 +1,36 @@
+name: Debug
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'version'
+        required: true
+        default: '0.1.0'
+        type: string
+
+jobs:
+  debug_job:
+    name: Debug on Linux
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      # - uses: actions/checkout@v2
+      
+      - name: Generate Assets
+        run: |
+          mkdir hello
+          cd hello
+          touch hello1.txt hello2.txt
+          mkdir sub_hello
+          touch sub_hello/sub_Hello1.txt sub_hello/sub_hello2.txt
+      
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          body: ${{ github.event.inputs.version }}
+          files: |
+            hello/
+            hello/hello1.txt
