@@ -20,10 +20,12 @@ jobs:
       - name: Generate Assets
         run: |
           mkdir hello
-          cd hello
-          touch hello1.txt hello2.txt
-          mkdir sub_hello
-          touch sub_hello/sub_Hello1.txt sub_hello/sub_hello2.txt
+          touch hello/hello1.txt hello/hello2.txt
+          mkdir hello/sub_hello
+          touch hello/sub_hello/sub_Hello1.txt hello/sub_hello/sub_hello2.txt
+          ls
+          ls hello
+          ls hello/sub_hello
       
       - name: Create Release
         uses: softprops/action-gh-release@v1
@@ -34,4 +36,4 @@ jobs:
           tag_name: ${{ github.event.inputs.version }}
           files: |
             hello/
-            hello/hello1.txt
+            hello/hello2.txt
