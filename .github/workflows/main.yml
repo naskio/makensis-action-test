@@ -38,6 +38,9 @@ jobs:
       uses: joncloud/makensis-action@v3.3
       with:
         additional-plugin-paths: ${{ github.workspace }}/NSIS_Plugins/Plugins
+    
+    - name: Rename
+      run: mv installsig.exe installsig${{ matrix.os}}.exe
 
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
