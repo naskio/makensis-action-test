@@ -21,6 +21,7 @@ jobs:
         run: |
           mkdir hello
           touch hello/hello1.txt hello/hello2.txt
+          echo mehdi > hello/hello2.txt
           mkdir hello/sub_hello
           touch hello/sub_hello/sub_Hello1.txt hello/sub_hello/sub_hello2.txt
           ls
@@ -44,3 +45,4 @@ jobs:
           files: |
             hello.zip
             hello/hello2.txt
+        # it is not possible to upload empty files
